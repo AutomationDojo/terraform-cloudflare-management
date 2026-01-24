@@ -1,6 +1,6 @@
 # Modules Overview
 
-The Cloudflare Terraform Module is organized into three main submodules, each focused on a specific area of Cloudflare functionality.
+The Cloudflare Terraform Module is organized into four main submodules, each focused on a specific area of Cloudflare functionality.
 
 ## Available Modules
 
@@ -49,6 +49,22 @@ Set up email forwarding and routing rules for your domains.
 
 ---
 
+### R2 Storage Module
+
+Manage Cloudflare R2 object storage buckets with S3-compatible access.
+
+**Key Features:**
+
+- S3-compatible object storage
+- Zero egress fees
+- Configurable bucket locations (eeur, weur, enam, wnam, apac)
+- Data jurisdiction control (eu, us, apac)
+- Storage class optimization (Standard, InfrequentAccess)
+
+[View R2 Documentation →](r2.md)
+
+---
+
 ## Module Design Philosophy
 
 Each module is designed to be:
@@ -65,19 +81,25 @@ You can combine modules in a single Terraform configuration:
 ```hcl
 # Deploy a Pages site
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
   # ... configuration
 }
 
 # Configure DNS
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
   # ... configuration
 }
 
 # Set up email routing
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
+  # ... configuration
+}
+
+# Create R2 storage buckets
+module "r2" {
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/r2?ref=v2.0.0"
   # ... configuration
 }
 ```

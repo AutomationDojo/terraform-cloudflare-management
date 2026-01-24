@@ -15,7 +15,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -53,7 +53,7 @@ Add to your `main.tf`:
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
 
   account_id = var.cloudflare_account_id
 
@@ -74,7 +74,7 @@ module "pages" {
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
 
   zone_id = var.cloudflare_zone_id
 
@@ -101,7 +101,7 @@ module "dns" {
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id

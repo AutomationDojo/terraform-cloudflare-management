@@ -1,46 +1,27 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project are documented in the [CHANGELOG.md](https://github.com/AutomationDojo/tf-module-cloudflare/blob/main/CHANGELOG.md) file in the repository root.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The changelog is automatically generated using [semantic-release](https://github.com/semantic-release/semantic-release) based on [Conventional Commits](https://www.conventionalcommits.org/).
 
-For the automatically generated changelog, see [CHANGELOG.md](https://github.com/AutomationDojo/tf-module-cloudflare/blob/main/CHANGELOG.md) in the repository root.
+## Latest Releases
 
-## [1.0.0] - 2024-12-26
+View all releases and their detailed changelogs:
 
-### Added
+- [GitHub Releases](https://github.com/AutomationDojo/tf-module-cloudflare/releases) - Full release notes with assets
+- [CHANGELOG.md](https://github.com/AutomationDojo/tf-module-cloudflare/blob/main/CHANGELOG.md) - Complete version history
 
-- Initial release of Cloudflare Terraform Module
-- **Pages Module**: Cloudflare Pages projects management
-  - GitHub integration for CI/CD
-  - Custom domain support
-  - Environment variables configuration
-  - Support for multiple projects
+## Version Guidelines
 
-- **DNS Module**: DNS records management
-  - Support for all DNS record types (A, AAAA, CNAME, MX, TXT, etc.)
-  - Cloudflare proxy configuration
-  - Configurable TTL per record
-  - Bulk record management
+This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html):
 
-- **Email Routing Module**: Email forwarding and routing
-  - Email forwarding to external addresses
-  - Rule-based routing with matchers
-  - Priority-based rule ordering
-  - Support for literal, wildcard, and regex patterns
-  - Multiple action types (forward, drop, worker)
+- **MAJOR** version (X.0.0) - Breaking changes that require user action
+- **MINOR** version (0.X.0) - New features that are backwards compatible
+- **PATCH** version (0.0.X) - Backwards compatible bug fixes
 
-- Automated versioning with semantic-release
-- Auto-generated documentation with terraform-docs
-- Comprehensive examples and documentation
+## Current Version
 
-### Documentation
+For the current version, see:
 
-- Complete module documentation
-- Getting started guide
-- Installation instructions
-- Usage examples
-- Contributing guidelines
-
-[1.0.0]: https://github.com/AutomationDojo/tf-module-cloudflare/releases/tag/v1.0.0
+- [Latest Release](https://github.com/AutomationDojo/tf-module-cloudflare/releases/latest)
+- [CHANGELOG.md](https://github.com/AutomationDojo/tf-module-cloudflare/blob/main/CHANGELOG.md)
