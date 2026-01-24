@@ -54,7 +54,7 @@ module "dns" {
 
 | Name | Type |
 |------|------|
-| [cloudflare_record.records](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
+| [cloudflare_dns_record.records](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 
 ## Inputs
 
