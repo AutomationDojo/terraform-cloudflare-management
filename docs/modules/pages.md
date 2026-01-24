@@ -6,15 +6,15 @@ The Pages module enables you to create and manage Cloudflare Pages projects with
 
 - **GitHub Integration**: Automatic CI/CD from your GitHub repository
 - **Custom Domains**: Configure custom domains with automatic SSL/TLS certificates
-- **Environment Variables**: Set build-time and runtime environment variables
+- **Deployment Configs**: Flexible per-environment configuration (production/preview)
 - **Multiple Projects**: Manage multiple Pages projects from a single module
-- **Production & Preview**: Automatic deployments for production and preview branches
+- **Monorepo Support**: Configure `root_dir` for projects in subdirectories
 
 ## Basic Usage
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -22,7 +22,8 @@ module "pages" {
     my-website = {
       name              = "my-website"
       production_branch = "main"
-      github_repo       = "my-org/my-website"
+      github_owner      = "my-org"
+      github_repo       = "my-website"
       build_command     = "npm run build"
       destination_dir   = "dist"
     }
@@ -36,7 +37,7 @@ module "pages" {
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -44,7 +45,8 @@ module "pages" {
     marketing-site = {
       name              = "marketing-site"
       production_branch = "main"
-      github_repo       = "company/marketing"
+      github_owner      = "company"
+      github_repo       = "marketing"
       build_command     = "npm run build"
       destination_dir   = "public"
       custom_domain     = "www.example.com"
@@ -53,11 +55,11 @@ module "pages" {
 }
 ```
 
-### With Environment Variables
+### With Deployment Configs (Environment Variables per Environment)
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -65,14 +67,49 @@ module "pages" {
     api-docs = {
       name              = "api-docs"
       production_branch = "main"
-      github_repo       = "company/api-docs"
+      github_owner      = "company"
+      github_repo       = "api-docs"
       build_command     = "npm run build"
       destination_dir   = "build"
-      environment_variables = {
-        NODE_VERSION = "20"
-        NPM_VERSION  = "10"
-        API_URL      = "https://api.example.com"
+
+      deployment_configs = {
+        production = {
+          environment_variables = {
+            NODE_VERSION = "22"
+            API_URL      = "https://api.example.com"
+          }
+          compatibility_date  = "2024-01-01"
+          compatibility_flags = ["nodejs_compat"]
+        }
+        preview = {
+          environment_variables = {
+            NODE_VERSION = "22"
+            API_URL      = "https://api.staging.example.com"
+          }
+        }
       }
+    }
+  }
+}
+```
+
+### Monorepo Setup (with root_dir)
+
+```hcl
+module "pages" {
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+
+  account_id = var.cloudflare_account_id
+
+  projects = {
+    frontend = {
+      name              = "my-frontend"
+      production_branch = "main"
+      github_owner      = "company"
+      github_repo       = "monorepo"
+      build_command     = "npm run build"
+      destination_dir   = "out"
+      root_dir          = "apps/frontend"  # Code is in a subdirectory
     }
   }
 }
@@ -82,7 +119,7 @@ module "pages" {
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -90,7 +127,8 @@ module "pages" {
     production-site = {
       name                       = "production-site"
       production_branch          = "main"
-      github_repo                = "company/website"
+      github_owner               = "company"
+      github_repo                = "website"
       build_command              = "npm run build"
       destination_dir            = "dist"
       preview_deployment_setting = "none"  # Disable preview deployments
@@ -99,10 +137,12 @@ module "pages" {
     staging-site = {
       name                       = "staging-site"
       production_branch          = "main"
-      github_repo                = "company/staging"
+      github_owner               = "company"
+      github_repo                = "staging"
       build_command              = "npm run build"
       destination_dir            = "dist"
-      preview_deployment_setting = "all"  # Enable preview deployments for all branches
+      preview_deployment_setting = "all"   # Enable preview deployments
+      preview_branch_includes    = ["dev", "feature/*"]  # Only these branches
     }
   }
 }
@@ -119,14 +159,25 @@ module "pages" {
 
 | Field | Description | Type | Required | Default |
 |-------|-------------|------|----------|---------|
-| `name` | Project name (must be unique) | `string` | Yes | - |
+| `name` | Project name (lowercase, hyphens only, no dots) | `string` | Yes | - |
 | `production_branch` | Git branch for production | `string` | Yes | - |
-| `github_repo` | GitHub repository (format: `owner/repo`) | `string` | Yes | - |
+| `github_owner` | GitHub user or organization | `string` | Yes | - |
+| `github_repo` | GitHub repository name | `string` | Yes | - |
 | `build_command` | Build command to run | `string` | Yes | - |
 | `destination_dir` | Output directory after build | `string` | Yes | - |
+| `root_dir` | Root directory for monorepo setups | `string` | No | `""` |
 | `custom_domain` | Custom domain for the project | `string` | No | `null` |
 | `preview_deployment_setting` | Preview deployment setting (`"none"` or `"all"`) | `string` | No | `"none"` |
-| `environment_variables` | Build environment variables | `map(string)` | No | `{}` |
+| `preview_branch_includes` | Branches to include for preview deployments | `list(string)` | No | `[]` |
+| `deployment_configs` | Per-environment deployment configuration | `map(object)` | No | `{}` |
+
+### Deployment Config Object
+
+| Field | Description | Type | Default |
+|-------|-------------|------|---------|
+| `environment_variables` | Environment variables for this environment | `map(string)` | `{}` |
+| `compatibility_date` | Workers compatibility date | `string` | `"2024-01-01"` |
+| `compatibility_flags` | Workers compatibility flags | `list(string)` | `[]` |
 
 ## Outputs
 
@@ -179,10 +230,10 @@ When using custom domains, ensure:
     The build configuration (build command, destination directory) must match your framework's requirements.
 
 !!! warning "Project Names"
-    Project names must be globally unique across all Cloudflare Pages projects.
+    Project names must be lowercase with hyphens only (no dots). For example, use `my-site` instead of `my.site`.
 
 !!! tip "Environment Variables"
-    Environment variables are available during build time. For runtime variables in frameworks like Next.js, use the appropriate prefix (e.g., `NEXT_PUBLIC_`).
+    Use `deployment_configs` to set different environment variables for production and preview environments. For runtime variables in frameworks like Next.js, use the appropriate prefix (e.g., `NEXT_PUBLIC_`).
 
 !!! info "Preview Deployments"
     The `preview_deployment_setting` controls automatic deployments for non-production branches:
@@ -190,7 +241,7 @@ When using custom domains, ensure:
     - `"none"`: Disables preview deployments (default)
     - `"all"`: Enables preview deployments for all branches
 
-    Use `"none"` for production sites to avoid unnecessary builds, or `"all"` for development/staging environments where you want to preview changes from all branches.
+    Use `preview_branch_includes` to limit which branches trigger preview deployments.
 
 ## Related
 

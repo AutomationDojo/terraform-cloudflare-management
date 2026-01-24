@@ -24,7 +24,7 @@ Comprehensive Terraform module for managing Cloudflare resources with modular su
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -32,10 +32,18 @@ module "pages" {
     my-site = {
       name              = "my-site"
       production_branch = "main"
+      github_owner      = "my-org"
       github_repo       = "my-repo"
       build_command     = "npm run build"
       destination_dir   = "dist"
       custom_domain     = "example.com"
+      deployment_configs = {
+        production = {
+          environment_variables = {
+            NODE_VERSION = "22"
+          }
+        }
+      }
     }
   }
 }
@@ -45,7 +53,7 @@ module "pages" {
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
 
   zone_id = var.cloudflare_zone_id
 
@@ -65,7 +73,7 @@ module "dns" {
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -105,7 +113,7 @@ module "email" {
 
 ```hcl
 module "r2" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/r2?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/r2?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 

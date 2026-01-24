@@ -13,7 +13,7 @@ Terraform module for managing Cloudflare DNS records.
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
 
   zone_id = var.cloudflare_zone_id
 
@@ -54,13 +54,13 @@ module "dns" {
 
 | Name | Type |
 |------|------|
-| [cloudflare_record.records](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
+| [cloudflare_dns_record.records](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_records"></a> [records](#input\_records) | List of DNS records to create | <pre>list(object({<br/>    name    = string<br/>    type    = string<br/>    value   = string<br/>    ttl     = optional(number, 1)<br/>    proxied = optional(bool, false)<br/>  }))</pre> | `[]` | no |
+| <a name="input_records"></a> [records](#input\_records) | List of DNS records to create | <pre>list(object({<br/>    name     = string<br/>    type     = string<br/>    value    = string<br/>    ttl      = optional(number, 1)<br/>    proxied  = optional(bool, false)<br/>    priority = optional(number, null)<br/>  }))</pre> | `[]` | no |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | Cloudflare zone ID | `string` | n/a | yes |
 
 ## Outputs

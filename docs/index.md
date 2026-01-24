@@ -25,7 +25,7 @@ This module provides a structured, maintainable way to manage your Cloudflare in
 
 ```hcl
 module "cloudflare_pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -33,10 +33,18 @@ module "cloudflare_pages" {
     my-website = {
       name              = "my-website"
       production_branch = "main"
-      github_repo       = "my-org/my-repo"
+      github_owner      = "my-org"
+      github_repo       = "my-repo"
       build_command     = "npm run build"
       destination_dir   = "dist"
       custom_domain     = "www.example.com"
+      deployment_configs = {
+        production = {
+          environment_variables = {
+            NODE_VERSION = "22"
+          }
+        }
+      }
     }
   }
 }

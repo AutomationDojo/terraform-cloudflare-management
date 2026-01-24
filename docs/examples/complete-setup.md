@@ -47,7 +47,7 @@ provider "cloudflare" {
 # ============================================================================
 
 module "pages_marketing" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -55,13 +55,18 @@ module "pages_marketing" {
     marketing = {
       name              = "company-marketing"
       production_branch = "main"
-      github_repo       = "company/marketing-site"
+      github_owner      = "company"
+      github_repo       = "marketing-site"
       build_command     = "npm run build"
       destination_dir   = "dist"
       custom_domain     = "www.example.com"
-      environment_variables = {
-        NODE_VERSION = "20"
-        NPM_VERSION  = "10"
+      deployment_configs = {
+        production = {
+          environment_variables = {
+            NODE_VERSION = "20"
+            NPM_VERSION  = "10"
+          }
+        }
       }
     }
   }
@@ -72,7 +77,7 @@ module "pages_marketing" {
 # ============================================================================
 
 module "pages_docs" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -80,12 +85,17 @@ module "pages_docs" {
     documentation = {
       name              = "company-docs"
       production_branch = "main"
-      github_repo       = "company/docs"
+      github_owner      = "company"
+      github_repo       = "docs"
       build_command     = "mkdocs build"
       destination_dir   = "site"
       custom_domain     = "docs.example.com"
-      environment_variables = {
-        PYTHON_VERSION = "3.11"
+      deployment_configs = {
+        production = {
+          environment_variables = {
+            PYTHON_VERSION = "3.11"
+          }
+        }
       }
     }
   }
@@ -96,7 +106,7 @@ module "pages_docs" {
 # ============================================================================
 
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
 
   zone_id = var.cloudflare_zone_id
 
@@ -178,7 +188,7 @@ module "dns" {
 # ============================================================================
 
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -477,7 +487,7 @@ Verify they arrive at the correct destination addresses.
 
 ```bash
 # Update module version in main.tf
-# Change ref=v2.0.0 to ref=v2.0.0
+# Change ref=v2.0.1 to ref=v2.0.1
 
 terraform init -upgrade
 terraform plan
@@ -528,7 +538,7 @@ terraform apply
 
 ## Best Practices Demonstrated
 
-1. **Module Versioning**: Using specific version tags (`ref=v2.0.0`)
+1. **Module Versioning**: Using specific version tags (`ref=v2.0.1`)
 2. **Separation of Concerns**: Each module handles one area
 3. **Environment Variables**: Properly configured for Pages builds
 4. **DNS Organization**: Clear naming and purpose for each record

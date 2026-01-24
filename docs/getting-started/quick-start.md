@@ -53,7 +53,7 @@ Add to your `main.tf`:
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
 
   account_id = var.cloudflare_account_id
 
@@ -61,10 +61,18 @@ module "pages" {
     my-blog = {
       name              = "my-blog"
       production_branch = "main"
-      github_repo       = "my-username/my-blog"
+      github_owner      = "my-username"
+      github_repo       = "my-blog"
       build_command     = "npm run build"
       destination_dir   = "public"
       custom_domain     = "blog.example.com"
+      deployment_configs = {
+        production = {
+          environment_variables = {
+            NODE_VERSION = "22"
+          }
+        }
+      }
     }
   }
 }
@@ -74,7 +82,7 @@ module "pages" {
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
 
   zone_id = var.cloudflare_zone_id
 
@@ -101,7 +109,7 @@ module "dns" {
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id

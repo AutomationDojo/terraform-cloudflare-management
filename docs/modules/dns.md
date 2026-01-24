@@ -2,6 +2,14 @@
 
 The DNS module provides a simple way to manage DNS records in your Cloudflare zones.
 
+!!! warning "Version 2.0 Upgrade"
+    Version 2.0+ uses the `cloudflare_dns_record` resource (required by Cloudflare provider v5). Key changes:
+    - Resource renamed from `cloudflare_record` to `cloudflare_dns_record`
+    - `name` field now automatically converts `@` to full domain name (FQDN)
+    - Subdomains are automatically expanded to FQDN (e.g., `www` becomes `www.example.com`)
+
+    If upgrading from v1.x, see the [migration guide](#migrating-from-v1x) below.
+
 ## Features
 
 - **All Record Types**: Support for A, AAAA, CNAME, MX, TXT, SRV, and more
@@ -14,7 +22,7 @@ The DNS module provides a simple way to manage DNS records in your Cloudflare zo
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
 
   zone_id = var.cloudflare_zone_id
 
@@ -36,7 +44,7 @@ module "dns" {
 
 ```hcl
 module "dns" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -131,7 +139,7 @@ records = [
 
 ```hcl
 module "dns" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -184,7 +192,7 @@ module "dns" {
 
 ```hcl
 module "dns_production" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -199,7 +207,7 @@ module "dns_production" {
 }
 
 module "dns_staging" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -325,8 +333,51 @@ When `proxied = false`:
 2. Nameservers pointing to Cloudflare
 3. Zone ID from Cloudflare dashboard
 
+## Migrating from v1.x
+
+If you're upgrading from v1.x to v2.0+, the DNS resource name changed from `cloudflare_record` to `cloudflare_dns_record` due to Cloudflare provider v5 requirements.
+
+### Key Changes in v2.0
+
+1. **Resource Renamed**: `cloudflare_record` → `cloudflare_dns_record`
+2. **FQDN Required**: The `name` field now uses fully qualified domain names
+   - `@` is automatically converted to your domain (e.g., `example.com`)
+   - Subdomains are automatically expanded (e.g., `www` → `www.example.com`)
+   - **No configuration change needed** - the module handles this automatically
+
+### Migration Steps
+
+1. **Update module version** in your configuration:
+   ```hcl
+   source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+   ```
+
+2. **Update Terraform state** for each DNS record:
+   ```bash
+   # List your current records
+   terraform state list | grep cloudflare_record
+
+   # For each record, move to new resource name
+   terraform state mv \
+     'module.dns.cloudflare_record.records["A-www"]' \
+     'module.dns.cloudflare_dns_record.records["A-www"]'
+   ```
+
+3. **Verify** the migration:
+   ```bash
+   terraform plan
+   # Should show no changes if migration was successful
+   ```
+
+!!! tip "No Configuration Changes"
+    You can continue using `@` for root domain and subdomain names (e.g., `www`) in your configuration. The module automatically converts them to FQDN format required by provider v5.
+
+!!! info "Automated Migration"
+    Cloudflare provides a [GritQL migration tool](https://github.com/cloudflare/terraform-provider-cloudflare#migration) that can automate state migrations, though it may not work with all module configurations.
+
 ## Related
 
 - [Pages Module](pages.md) - Works great with custom domains
 - [Email Module](email.md) - Automatic MX record management
 - [Cloudflare DNS Documentation](https://developers.cloudflare.com/dns/)
+- [Cloudflare Provider v5 Upgrade Guide](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/guides/version-5-upgrade)

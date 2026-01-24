@@ -14,8 +14,8 @@ output "custom_domains" {
   description = "Map of custom domains configured"
   value = {
     for k, v in cloudflare_pages_domain.domains : k => {
-      domain = v.domain
-      url    = "https://${v.domain}"
+      domain = v.name
+      url    = "https://${v.name}"
     }
   }
 }
