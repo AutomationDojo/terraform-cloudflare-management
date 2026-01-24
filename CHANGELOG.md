@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v1.2.0...v1.3.0) (2026-01-24)
+
+### Features
+
+* R2 module ([#5](https://github.com/AutomationDojo/tf-module-cloudflare/issues/5)) ([02a57dc](https://github.com/AutomationDojo/tf-module-cloudflare/commit/02a57dca35807401256db2f0bf267cf9b20743dc))
+
 ## [1.2.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v1.1.0...v1.2.0) (2025-12-26)
 
 ### Features
