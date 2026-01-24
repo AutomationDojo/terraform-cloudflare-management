@@ -22,22 +22,20 @@ resource "cloudflare_email_routing_rule" "rules" {
   enabled  = each.value.enabled
   priority = each.value.priority
 
-  dynamic "matcher" {
-    for_each = each.value.matchers
-    content {
-      type  = matcher.value.type
-      field = matcher.value.field
-      value = matcher.value.value
+  matchers = [
+    for m in each.value.matchers : {
+      type  = m.type
+      field = m.field
+      value = m.value
     }
-  }
+  ]
 
-  dynamic "action" {
-    for_each = each.value.actions
-    content {
-      type  = action.value.type
-      value = action.value.value
+  actions = [
+    for a in each.value.actions : {
+      type  = a.type
+      value = a.value
     }
-  }
+  ]
 
   depends_on = [
     cloudflare_email_routing_address.addresses
