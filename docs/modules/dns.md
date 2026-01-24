@@ -14,7 +14,7 @@ The DNS module provides a simple way to manage DNS records in your Cloudflare zo
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
 
   zone_id = var.cloudflare_zone_id
 
@@ -36,7 +36,7 @@ module "dns" {
 
 ```hcl
 module "dns" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -131,7 +131,7 @@ records = [
 
 ```hcl
 module "dns" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -184,7 +184,7 @@ module "dns" {
 
 ```hcl
 module "dns_production" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -199,7 +199,7 @@ module "dns_production" {
 }
 
 module "dns_staging" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
   zone_id = var.cloudflare_zone_id
 
   records = [

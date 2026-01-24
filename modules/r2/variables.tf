@@ -9,7 +9,7 @@ variable "buckets" {
     name     = string
     location = optional(string, "eeur")
     jurisdiction = optional(string, "eu")
-    storage_class = optional(string, "default")
+    storage_class = optional(string, "Standard")
   }))
   default = []
 }

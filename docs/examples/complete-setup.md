@@ -33,7 +33,7 @@ terraform {
   required_providers {
     cloudflare = {
       source  = "cloudflare/cloudflare"
-      version = "~> 4.0"
+      version = "~> 5.0"
     }
   }
 }
@@ -47,7 +47,7 @@ provider "cloudflare" {
 # ============================================================================
 
 module "pages_marketing" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
 
   account_id = var.cloudflare_account_id
 
@@ -72,7 +72,7 @@ module "pages_marketing" {
 # ============================================================================
 
 module "pages_docs" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
 
   account_id = var.cloudflare_account_id
 
@@ -96,7 +96,7 @@ module "pages_docs" {
 # ============================================================================
 
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.0"
 
   zone_id = var.cloudflare_zone_id
 
@@ -178,7 +178,7 @@ module "dns" {
 # ============================================================================
 
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -477,7 +477,7 @@ Verify they arrive at the correct destination addresses.
 
 ```bash
 # Update module version in main.tf
-# Change ref=v1.0.0 to ref=v2.0.0
+# Change ref=v2.0.0 to ref=v2.0.0
 
 terraform init -upgrade
 terraform plan
@@ -528,7 +528,7 @@ terraform apply
 
 ## Best Practices Demonstrated
 
-1. **Module Versioning**: Using specific version tags (`ref=v1.0.0`)
+1. **Module Versioning**: Using specific version tags (`ref=v2.0.0`)
 2. **Separation of Concerns**: Each module handles one area
 3. **Environment Variables**: Properly configured for Pages builds
 4. **DNS Organization**: Clear naming and purpose for each record

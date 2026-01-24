@@ -7,6 +7,7 @@ Welcome to the Cloudflare Terraform Module documentation! This comprehensive mod
 - **📄 Pages** - Manage Cloudflare Pages projects with custom domains and build configurations
 - **🌐 DNS** - Create and manage DNS records with full control over proxying and TTL
 - **📧 Email Routing** - Set up email forwarding and routing rules for your domains
+- **💾 R2 Storage** - Manage R2 object storage buckets with jurisdiction and storage class control
 - **🔄 Automated Versioning** - Semantic release integration for automated version management
 - **📝 Auto-generated Docs** - Terraform-docs integration for always up-to-date module documentation
 
@@ -24,7 +25,7 @@ This module provides a structured, maintainable way to manage your Cloudflare in
 
 ```hcl
 module "cloudflare_pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v1.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.0"
 
   account_id = var.cloudflare_account_id
 
@@ -52,7 +53,7 @@ module "cloudflare_pages" {
 | Name | Version |
 |------|---------|
 | Terraform | >= 1.0 |
-| Cloudflare Provider | ~> 4.0 |
+| Cloudflare Provider | ~> 5.0 |
 
 ## License
 
