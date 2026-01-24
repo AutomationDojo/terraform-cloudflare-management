@@ -60,7 +60,7 @@ module "dns" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_records"></a> [records](#input\_records) | List of DNS records to create | <pre>list(object({<br/>    name    = string<br/>    type    = string<br/>    value   = string<br/>    ttl     = optional(number, 1)<br/>    proxied = optional(bool, false)<br/>  }))</pre> | `[]` | no |
+| <a name="input_records"></a> [records](#input\_records) | List of DNS records to create | <pre>list(object({<br/>    name     = string<br/>    type     = string<br/>    value    = string<br/>    ttl      = optional(number, 1)<br/>    proxied  = optional(bool, false)<br/>    priority = optional(number, null)<br/>  }))</pre> | `[]` | no |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | Cloudflare zone ID | `string` | n/a | yes |
 
 ## Outputs
