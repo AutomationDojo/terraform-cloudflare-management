@@ -14,7 +14,7 @@ resource "cloudflare_pages_project" "projects" {
       pr_comments_enabled           = true
       production_deployments_enabled = true
       preview_deployment_setting     = each.value.preview_deployment_setting
-      preview_branch_includes        = each.value.preview_branch_includes
+      preview_branch_includes        = length(each.value.preview_branch_includes) > 0 ? each.value.preview_branch_includes : null
     }
   }
 
@@ -25,10 +25,17 @@ resource "cloudflare_pages_project" "projects" {
   }
 
   deployment_configs = {
-    for env, config in each.value.deployment_configs : env => {
-      environment_variables = config.environment_variables
-      compatibility_date    = config.compatibility_date
-      compatibility_flags   = config.compatibility_flags
+    production = {
+      environment_variables = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.environment_variables : {}
+      compatibility_date    = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_date : "2024-01-01"
+      compatibility_flags   = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_flags : []
+      fail_open             = true
+    }
+    preview = {
+      environment_variables = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.environment_variables : {}
+      compatibility_date    = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_date : "2024-01-01"
+      compatibility_flags   = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_flags : []
+      fail_open             = true
     }
   }
 }
