@@ -1,3 +1,23 @@
+## [2.0.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v1.3.1...v2.0.0) (2026-01-24)
+
+### ⚠ BREAKING CHANGES
+
+* All modules now require Cloudflare provider v5.0 or higher.
+
+- Updated provider version constraint from ~> 4.0 to ~> 5.0 across all modules
+- DNS, Email, Pages, and R2 modules now require provider v5.0+
+- R2 module: Added jurisdiction parameter for data residency compliance (eu, us, apac)
+- R2 module: Added storage_class parameter for cost optimization (Standard, InfrequentAccess)
+- Updated all module documentation and examples to reference v2.0.0
+- Added R2 module to main documentation indices and feature lists
+- Consolidated changelog to single source of truth in CHANGELOG.md
+
+Migration: Users must upgrade to Cloudflare provider v5.0+ to use this version.
+
+### Features
+
+* upgrade all modules to Cloudflare provider v5.0 ([362e635](https://github.com/AutomationDojo/tf-module-cloudflare/commit/362e635a7cf9d09b5652e82ca998bcc83f49b47b))
+
 ## [1.3.1](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v1.3.0...v1.3.1) (2026-01-24)
 
 ### Bug Fixes
