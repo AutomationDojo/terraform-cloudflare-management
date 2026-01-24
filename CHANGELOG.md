@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.0.0...v2.0.1) (2026-01-24)
+
+### Bug Fixes
+
+* Update resource names ([#8](https://github.com/AutomationDojo/tf-module-cloudflare/issues/8)) ([604338f](https://github.com/AutomationDojo/tf-module-cloudflare/commit/604338f465e519388c20fad755922a8c8b1cc5dd))
+
 ## [2.0.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v1.3.1...v2.0.0) (2026-01-24)
 
 ### ⚠ BREAKING CHANGES
