@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v1.3.0...v1.3.1) (2026-01-24)
+
+### Bug Fixes
+
+* r2 module - missing options ([#6](https://github.com/AutomationDojo/tf-module-cloudflare/issues/6)) ([2b13496](https://github.com/AutomationDojo/tf-module-cloudflare/commit/2b134967fedf83a58f0e8938a9ce1dd65319914e))
+
 ## [1.3.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v1.2.0...v1.3.0) (2026-01-24)
 
 ### Features
