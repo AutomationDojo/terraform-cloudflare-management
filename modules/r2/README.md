@@ -19,12 +19,16 @@ module "r2" {
 
   buckets = [
     {
-      name     = "my-storage-bucket"
-      location = "auto"
+      name          = "my-storage-bucket"
+      location      = "eeur"
+      jurisdiction  = "eu"
+      storage_class = "Standard"
     },
     {
-      name     = "eu-data-bucket"
-      location = "WEUR"
+      name          = "us-data-bucket"
+      location      = "wnam"
+      jurisdiction  = "us"
+      storage_class = "Standard"
     }
   ]
 }
@@ -59,7 +63,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Cloudflare account ID | `string` | n/a | yes |
-| <a name="input_buckets"></a> [buckets](#input\_buckets) | List of R2 buckets to create | <pre>list(object({<br/>    name     = string<br/>    location = optional(string, "EEUR")<br/>  }))</pre> | `[]` | no |
+| <a name="input_buckets"></a> [buckets](#input\_buckets) | List of R2 buckets to create | <pre>list(object({<br/>    name          = string<br/>    location      = optional(string, "eeur")<br/>    jurisdiction  = optional(string, "eu")<br/>    storage_class = optional(string, "Standard")<br/>  }))</pre> | `[]` | no |
 
 ## Outputs
 
