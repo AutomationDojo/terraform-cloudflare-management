@@ -5,37 +5,30 @@ resource "cloudflare_pages_project" "projects" {
   name              = each.value.name
   production_branch = each.value.production_branch
 
-  source {
+  source = {
     type = "github"
-    config {
-      owner                         = "AutomationDojo"
+    config = {
+      owner                         = each.value.github_owner
       repo_name                     = each.value.github_repo
       production_branch             = each.value.production_branch
       pr_comments_enabled           = true
-      deployments_enabled           = true
-      production_deployment_enabled = true
-      preview_deployment_setting    = each.value.preview_deployment_setting
-      preview_branch_includes       = ["*"]
+      production_deployments_enabled = true
+      preview_deployment_setting     = each.value.preview_deployment_setting
+      preview_branch_includes        = each.value.preview_branch_includes
     }
   }
 
-  build_config {
+  build_config = {
     build_command   = each.value.build_command
     destination_dir = each.value.destination_dir
-    root_dir        = ""
+    root_dir        = each.value.root_dir
   }
 
-  deployment_configs {
-    production {
-      environment_variables = each.value.environment_variables
-      compatibility_date    = "2024-01-01"
-      compatibility_flags   = []
-    }
-
-    preview {
-      environment_variables = each.value.environment_variables
-      compatibility_date    = "2024-01-01"
-      compatibility_flags   = []
+  deployment_configs = {
+    for env, config in each.value.deployment_configs : env => {
+      environment_variables = config.environment_variables
+      compatibility_date    = config.compatibility_date
+      compatibility_flags   = config.compatibility_flags
     }
   }
 }
@@ -49,5 +42,5 @@ resource "cloudflare_pages_domain" "domains" {
 
   account_id   = var.account_id
   project_name = cloudflare_pages_project.projects[each.key].name
-  domain       = each.value.custom_domain
+  name         = each.value.custom_domain
 }
