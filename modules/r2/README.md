@@ -44,6 +44,10 @@ module "r2" {
 |------|---------|
 | <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | ~> 4.0 |
 
+## Modules
+
+No modules.
+
 ## Resources
 
 | Name | Type |
@@ -55,7 +59,7 @@ module "r2" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Cloudflare account ID | `string` | n/a | yes |
-| <a name="input_buckets"></a> [buckets](#input\_buckets) | List of R2 buckets to create | <pre>list(object({<br/>    name     = string<br/>    location = optional(string, "auto")<br/>  }))</pre> | `[]` | no |
+| <a name="input_buckets"></a> [buckets](#input\_buckets) | List of R2 buckets to create | <pre>list(object({<br/>    name     = string<br/>    location = optional(string, "EEUR")<br/>  }))</pre> | `[]` | no |
 
 ## Outputs
 
