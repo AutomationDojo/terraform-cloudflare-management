@@ -77,6 +77,7 @@ nav:
     - Pages: modules/pages.md
     - DNS: modules/dns.md
     - Email Routing: modules/email.md
+    - R2 Storage: modules/r2.md
   - Examples:
     - Complete Setup: examples/complete-setup.md
   - Contributing: contributing.md
