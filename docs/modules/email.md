@@ -15,7 +15,7 @@ The Email Routing module enables you to forward emails from your domain to desti
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -59,7 +59,7 @@ module "email" {
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -146,7 +146,7 @@ module "email" {
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.0"
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
