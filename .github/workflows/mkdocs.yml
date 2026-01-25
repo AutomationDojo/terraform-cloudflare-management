@@ -49,6 +49,13 @@ jobs:
       - name: Build documentation
         run: mkdocs build --strict
 
+      - name: Copy CNAME file
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if [ -f CNAME ]; then
+            cp CNAME site/CNAME
+          fi
+
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: mkdocs gh-deploy --force
