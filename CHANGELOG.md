@@ -1,3 +1,9 @@
+## [2.1.1](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.1.0...v2.1.1) (2026-01-25)
+
+### Bug Fixes
+
+* add CNAME ([53d9220](https://github.com/AutomationDojo/tf-module-cloudflare/commit/53d92209df8dc099f768a67381fa81042778f269))
+
 ## [2.1.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.0.1...v2.1.0) (2026-01-25)
 
 ### Features
