@@ -1,6 +1,6 @@
 # Modules Overview
 
-The Cloudflare Terraform Module is organized into four main submodules, each focused on a specific area of Cloudflare functionality.
+The Cloudflare Terraform Module is organized into five main submodules, each focused on a specific area of Cloudflare functionality.
 
 ## Available Modules
 
@@ -65,6 +65,23 @@ Manage Cloudflare R2 object storage buckets with S3-compatible access.
 
 ---
 
+### Tunnel Module
+
+Create and manage Cloudflare Tunnels for secure connectivity to your origin servers.
+
+**Key Features:**
+
+- Secure origin connectivity without exposing IP addresses
+- Ingress rules for routing to multiple services
+- Private network routes for WARP client access
+- Automatic secret generation
+- Ready-to-use credentials output for cloudflared
+- Support for saving credentials to plaintext or SOPS-encrypted files
+
+[View Tunnel Documentation →](tunnel.md)
+
+---
+
 ## Module Design Philosophy
 
 Each module is designed to be:
@@ -100,6 +117,12 @@ module "email" {
 # Create R2 storage buckets
 module "r2" {
   source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/r2?ref=v2.0.1"
+  # ... configuration
+}
+
+# Create secure tunnels
+module "tunnel" {
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/tunnel?ref=v2.0.1"
   # ... configuration
 }
 ```

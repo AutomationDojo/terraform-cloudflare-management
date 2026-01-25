@@ -8,6 +8,7 @@ Comprehensive Terraform module for managing Cloudflare resources with modular su
 - 🌐 **DNS** - DNS records management
 - 📧 **Email Routing** - Email forwarding and routing rules
 - 💾 **R2 Storage** - R2 object storage buckets management
+- 🔒 **Tunnel** - Cloudflare Tunnels for secure origin connectivity
 - 🔄 **Automated Versioning** - Semantic release integration
 - 📝 **Auto-generated Docs** - Terraform-docs integration
 
@@ -17,6 +18,7 @@ Comprehensive Terraform module for managing Cloudflare resources with modular su
 - **[dns](./modules/dns/)** - DNS records management
 - **[email](./modules/email/)** - Email routing and forwarding
 - **[r2](./modules/r2/)** - R2 object storage buckets
+- **[tunnel](./modules/tunnel/)** - Cloudflare Tunnels
 
 ## Quick Start
 
@@ -125,6 +127,31 @@ module "r2" {
       storage_class = "Standard"
     }
   ]
+}
+```
+
+### Tunnel Module
+
+```hcl
+module "tunnel" {
+  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/tunnel?ref=v2.0.1"
+
+  account_id = var.cloudflare_account_id
+
+  tunnels = {
+    my-tunnel = {
+      name = "my-app-tunnel"
+      ingress_rules = [
+        {
+          hostname = "app.example.com"
+          service  = "http://localhost:8080"
+        },
+        {
+          service = "http_status:404"
+        }
+      ]
+    }
+  }
 }
 ```
 
