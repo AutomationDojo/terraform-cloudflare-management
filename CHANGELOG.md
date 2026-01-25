@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.0.1...v2.1.0) (2026-01-25)
+
+### Features
+
+* add tunnel module and docs ([#9](https://github.com/AutomationDojo/tf-module-cloudflare/issues/9)) ([12d364a](https://github.com/AutomationDojo/tf-module-cloudflare/commit/12d364a1b3885b47ef169e022fe761b898dcdffe))
+
 ## [2.0.1](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.0.0...v2.0.1) (2026-01-24)
 
 ### Bug Fixes
