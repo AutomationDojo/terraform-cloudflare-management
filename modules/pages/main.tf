@@ -26,16 +26,16 @@ resource "cloudflare_pages_project" "projects" {
 
   deployment_configs = {
     production = {
-      environment_variables = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.environment_variables : {}
-      compatibility_date    = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_date : "2024-01-01"
-      compatibility_flags   = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_flags : []
-      fail_open             = true
+      env_vars            = local.production_env_vars[each.key]
+      compatibility_date  = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_date : "2024-01-01"
+      compatibility_flags = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_flags : []
+      fail_open           = true
     }
     preview = {
-      environment_variables = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.environment_variables : {}
-      compatibility_date    = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_date : "2024-01-01"
-      compatibility_flags   = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_flags : []
-      fail_open             = true
+      env_vars            = local.preview_env_vars[each.key]
+      compatibility_date  = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_date : "2024-01-01"
+      compatibility_flags = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_flags : []
+      fail_open           = true
     }
   }
 }

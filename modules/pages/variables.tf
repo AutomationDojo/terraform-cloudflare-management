@@ -17,9 +17,15 @@ variable "projects" {
     preview_deployment_setting = optional(string, "none")
     preview_branch_includes    = optional(list(string), [])
     deployment_configs = optional(map(object({
+      # Simple key-value env vars (plain text). Merged with env_vars; env_vars takes precedence for same key.
       environment_variables = optional(map(string), {})
-      compatibility_date    = optional(string, "2024-01-01")
-      compatibility_flags   = optional(list(string), [])
+      # Full env vars with type (plain_text or secret). Use for secrets or when you need to set type explicitly.
+      env_vars = optional(map(object({
+        value = string
+        type  = optional(string, "plain_text") # "plain_text" or "secret"
+      })), {})
+      compatibility_date  = optional(string, "2024-01-01")
+      compatibility_flags = optional(list(string), [])
     })), {})
   }))
 }
