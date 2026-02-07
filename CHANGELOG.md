@@ -1,3 +1,9 @@
+## [2.2.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.1.2...v2.2.0) (2026-02-07)
+
+### Features
+
+* Add env var support ([#11](https://github.com/AutomationDojo/tf-module-cloudflare/issues/11)) ([16a4a27](https://github.com/AutomationDojo/tf-module-cloudflare/commit/16a4a27c718be28f8713ee97f4f3f0471e3a97d4))
+
 ## [2.1.2](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.1.1...v2.1.2) (2026-02-07)
 
 ### Bug Fixes
