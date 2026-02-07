@@ -33,6 +33,10 @@ module "pages" {
           environment_variables = {
             NODE_VERSION = "22"
           }
+          # Optional: use env_vars for secrets (type = "plain_text" or "secret")
+          # env_vars = {
+          #   API_KEY = { value = var.api_key, type = "secret" }
+          # }
         }
       }
     }
@@ -66,7 +70,7 @@ module "pages" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Cloudflare account ID | `string` | n/a | yes |
-| <a name="input_projects"></a> [projects](#input\_projects) | Map of Cloudflare Pages projects to create | <pre>map(object({<br/>    name                       = string<br/>    production_branch          = string<br/>    github_owner               = string<br/>    github_repo                = string<br/>    build_command              = string<br/>    destination_dir            = string<br/>    root_dir                   = optional(string, "")<br/>    custom_domain              = optional(string)<br/>    preview_deployment_setting = optional(string, "none")<br/>    preview_branch_includes    = optional(list(string), [])<br/>    deployment_configs = optional(map(object({<br/>      environment_variables = optional(map(string), {})<br/>      compatibility_date    = optional(string, "2024-01-01")<br/>      compatibility_flags   = optional(list(string), [])<br/>    })), {})<br/>  }))</pre> | n/a | yes |
+| <a name="input_projects"></a> [projects](#input\_projects) | Map of Cloudflare Pages projects to create | <pre>map(object({<br/>    name                       = string<br/>    production_branch          = string<br/>    github_owner               = string<br/>    github_repo                = string<br/>    build_command              = string<br/>    destination_dir            = string<br/>    root_dir                   = optional(string, "")<br/>    custom_domain              = optional(string)<br/>    preview_deployment_setting = optional(string, "none")<br/>    preview_branch_includes    = optional(list(string), [])<br/>    deployment_configs = optional(map(object({<br/>      environment_variables = optional(map(string), {})<br/>      env_vars = optional(map(object({<br/>        value = string<br/>        type  = optional(string, "plain_text")<br/>      })), {})<br/>      compatibility_date    = optional(string, "2024-01-01")<br/>      compatibility_flags   = optional(list(string), [])<br/>    })), {})<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
