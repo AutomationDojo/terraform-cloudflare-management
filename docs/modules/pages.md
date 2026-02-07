@@ -57,6 +57,10 @@ module "pages" {
 
 ### With Deployment Configs (Environment Variables per Environment)
 
+You can use **`environment_variables`** (simple `map(string)`, all plain text) or **`env_vars`** (full control with `value` and `type` for secrets).
+
+**Simple form (plain text only):**
+
 ```hcl
 module "pages" {
   source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
@@ -92,6 +96,34 @@ module "pages" {
   }
 }
 ```
+
+**Full form with secrets (`env_vars`):**
+
+Use `env_vars` when you need to mark a value as a secret (e.g. API keys). Types: `plain_text` (default) or `secret`.
+
+```hcl
+      deployment_configs = {
+        production = {
+          environment_variables = {
+            NODE_VERSION = "22"
+          }
+          env_vars = {
+            API_KEY = {
+              value = var.api_key
+              type  = "secret"
+            }
+            API_URL = {
+              value = "https://api.example.com"
+              type  = "plain_text"
+            }
+          }
+          compatibility_date  = "2024-01-01"
+          compatibility_flags = ["nodejs_compat"]
+        }
+      }
+```
+
+Both forms can be combined; `env_vars` takes precedence for the same key.
 
 ### Monorepo Setup (with root_dir)
 
@@ -175,7 +207,8 @@ module "pages" {
 
 | Field | Description | Type | Default |
 |-------|-------------|------|---------|
-| `environment_variables` | Environment variables for this environment | `map(string)` | `{}` |
+| `environment_variables` | Simple env vars (plain text). Key-value map. Merged with `env_vars`; `env_vars` wins on same key. | `map(string)` | `{}` |
+| `env_vars` | Env vars with type (`plain_text` or `secret`). Use for secrets. Each entry: `{ value = string, type = optional(string, "plain_text") }`. | `map(object)` | `{}` |
 | `compatibility_date` | Workers compatibility date | `string` | `"2024-01-01"` |
 | `compatibility_flags` | Workers compatibility flags | `list(string)` | `[]` |
 
@@ -233,7 +266,7 @@ When using custom domains, ensure:
     Project names must be lowercase with hyphens only (no dots). For example, use `my-site` instead of `my.site`.
 
 !!! tip "Environment Variables"
-    Use `deployment_configs` to set different environment variables for production and preview environments. For runtime variables in frameworks like Next.js, use the appropriate prefix (e.g., `NEXT_PUBLIC_`).
+    Use `deployment_configs` to set different environment variables for production and preview. Use **`environment_variables`** (map of string) for plain text, or **`env_vars`** (map of `{ value, type }`) for secrets (`type = "secret"`). Both can be used together; `env_vars` overrides for the same key. For runtime variables in frameworks like Next.js, use the appropriate prefix (e.g., `NEXT_PUBLIC_`).
 
 !!! info "Preview Deployments"
     The `preview_deployment_setting` controls automatic deployments for non-production branches:

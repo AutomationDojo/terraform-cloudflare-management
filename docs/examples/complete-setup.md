@@ -95,6 +95,7 @@ module "pages_docs" {
           environment_variables = {
             PYTHON_VERSION = "3.11"
           }
+          # For secrets use env_vars: { KEY = { value = var.secret, type = "secret" } }
         }
       }
     }

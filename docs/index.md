@@ -4,7 +4,7 @@ Welcome to the Cloudflare Terraform Module documentation! This comprehensive mod
 
 ## Features
 
-- **📄 Pages** - Manage Cloudflare Pages projects with custom domains and build configurations
+- **📄 Pages** - Manage Cloudflare Pages projects with custom domains, build configurations, and environment variables (plain text and secrets)
 - **🌐 DNS** - Create and manage DNS records with full control over proxying and TTL
 - **📧 Email Routing** - Set up email forwarding and routing rules for your domains
 - **💾 R2 Storage** - Manage R2 object storage buckets with jurisdiction and storage class control
