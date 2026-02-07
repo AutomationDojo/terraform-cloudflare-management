@@ -1,3 +1,9 @@
+## [2.1.2](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.1.1...v2.1.2) (2026-02-07)
+
+### Bug Fixes
+
+* make production_deployments_enabled optional ([#10](https://github.com/AutomationDojo/tf-module-cloudflare/issues/10)) ([d6a19be](https://github.com/AutomationDojo/tf-module-cloudflare/commit/d6a19be8de4b5b8cfd4aa745506920f7d4842a63))
+
 ## [2.1.1](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.1.0...v2.1.1) (2026-01-25)
 
 ### Bug Fixes

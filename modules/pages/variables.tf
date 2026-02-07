@@ -14,7 +14,8 @@ variable "projects" {
     destination_dir            = string
     root_dir                   = optional(string, "")
     custom_domain              = optional(string)
-    preview_deployment_setting = optional(string, "none")
+    production_deployments_enabled = optional(bool, true)
+    preview_deployment_setting     = optional(string, "none")
     preview_branch_includes    = optional(list(string), [])
     deployment_configs = optional(map(object({
       # Simple key-value env vars (plain text). Merged with env_vars; env_vars takes precedence for same key.
