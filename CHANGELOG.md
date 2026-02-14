@@ -1,3 +1,9 @@
+## [2.3.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.2.0...v2.3.0) (2026-02-14)
+
+### Features
+
+* r2 cors and custom domain ([#12](https://github.com/AutomationDojo/tf-module-cloudflare/issues/12)) ([84223f2](https://github.com/AutomationDojo/tf-module-cloudflare/commit/84223f2b76f6138b6939bfda974630867dcd2ca3))
+
 ## [2.2.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.1.2...v2.2.0) (2026-02-07)
 
 ### Features
