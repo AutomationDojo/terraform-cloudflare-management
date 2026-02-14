@@ -60,6 +60,8 @@ Manage Cloudflare R2 object storage buckets with S3-compatible access.
 - Configurable bucket locations (eeur, weur, enam, wnam, apac)
 - Data jurisdiction control (eu, us, apac)
 - Storage class optimization (Standard, InfrequentAccess)
+- CORS configuration per bucket
+- Custom domain bindings for public access
 
 [View R2 Documentation →](r2.md)
 
