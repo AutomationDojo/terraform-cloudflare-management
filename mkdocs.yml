@@ -1,7 +1,7 @@
 site_name: Cloudflare Terraform Module
 site_description: Comprehensive Terraform module for managing Cloudflare resources
 site_author: AutomationDojo
-site_url: https://automationdojo.github.io/tf-module-cloudflare
+site_url: https://cloudflare-terraform-module.automationdojo.org/
 
 repo_name: AutomationDojo/tf-module-cloudflare
 repo_url: https://github.com/AutomationDojo/tf-module-cloudflare
