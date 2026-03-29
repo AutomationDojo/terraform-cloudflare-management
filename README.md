@@ -160,6 +160,10 @@ module "tunnel" {
 }
 ```
 
+## Registry
+
+Available on the Terraform Registry: **[AutomationDojo/management/cloudflare](https://registry.terraform.io/modules/AutomationDojo/management/cloudflare/latest)**
+
 ## Documentation
 
 Full documentation is available at: **https://automationdojo.github.io/tf-module-cloudflare**
