@@ -11,13 +11,14 @@ Terraform module for managing Cloudflare Email Routing to forward emails from yo
 - 🔄 Support for multiple matchers per rule (literal, wildcard, regex)
 - ⚡ Flexible actions (forward, drop, worker)
 
-## Usage
+## Examples
 
 ### Basic Example
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/email"
+  version = "2.3.0"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -59,7 +60,8 @@ module "email" {
 
 ```hcl
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/email"
+  version = "2.3.0"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -192,7 +194,7 @@ module "email" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Cloudflare account ID | `string` | `null` | no |
-| <a name="input_email_routing"></a> [email\_routing](#input\_email\_routing) | Email routing configuration | <pre>object({<br/>    enabled = bool<br/>    rules = list(object({<br/>      name     = string<br/>      matchers = list(object({<br/>        type  = string<br/>        field = string<br/>        value = string<br/>      }))<br/>      actions = list(object({<br/>        type  = string<br/>        value = list(string)<br/>      }))<br/>      enabled  = optional(bool, true)<br/>      priority = optional(number, 0)<br/>    }))<br/>    addresses = optional(list(object({<br/>      email = string<br/>    })), [])<br/>  })</pre> | <pre>{<br/>  "addresses": [],<br/>  "enabled": false,<br/>  "rules": []<br/>}</pre> | no |
+| <a name="input_email_routing"></a> [email\_routing](#input\_email\_routing) | Email routing configuration | <pre>object({<br/>    enabled = bool<br/>    rules = list(object({<br/>      name = string<br/>      matchers = list(object({<br/>        type  = string<br/>        field = string<br/>        value = string<br/>      }))<br/>      actions = list(object({<br/>        type  = string<br/>        value = list(string)<br/>      }))<br/>      enabled  = optional(bool, true)<br/>      priority = optional(number, 0)<br/>    }))<br/>    addresses = optional(list(object({<br/>      email = string<br/>    })), [])<br/>  })</pre> | <pre>{<br/>  "addresses": [],<br/>  "enabled": false,<br/>  "rules": []<br/>}</pre> | no |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | Cloudflare zone ID | `string` | n/a | yes |
 
 ## Outputs

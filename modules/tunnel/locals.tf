@@ -19,12 +19,12 @@ locals {
   tunnel_file_paths = var.output_file_path != null ? {
     for k, v in cloudflare_zero_trust_tunnel_cloudflared.tunnels : k => replace(var.output_file_path, "{tunnel_key}", k)
   } : {}
-  
+
   # Determine file path for tunnel tokens
   tunnel_token_file_paths = var.output_token_file_path != null ? {
     for k, v in cloudflare_zero_trust_tunnel_cloudflared.tunnels : k => replace(var.output_token_file_path, "{tunnel_key}", k)
   } : {}
-  
+
   # Prepare token data as JSON (simple object with token)
   tunnel_token_json = {
     for k, v in data.cloudflare_zero_trust_tunnel_cloudflared_token.tokens : k => jsonencode({

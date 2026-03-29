@@ -6,17 +6,17 @@ variable "account_id" {
 variable "projects" {
   description = "Map of Cloudflare Pages projects to create"
   type = map(object({
-    name                       = string
-    production_branch          = string
-    github_owner               = string
-    github_repo                = string
-    build_command              = string
-    destination_dir            = string
-    root_dir                   = optional(string, "")
-    custom_domain              = optional(string)
+    name                           = string
+    production_branch              = string
+    github_owner                   = string
+    github_repo                    = string
+    build_command                  = string
+    destination_dir                = string
+    root_dir                       = optional(string, "")
+    custom_domain                  = optional(string)
     production_deployments_enabled = optional(bool, true)
     preview_deployment_setting     = optional(string, "none")
-    preview_branch_includes    = optional(list(string), [])
+    preview_branch_includes        = optional(list(string), [])
     deployment_configs = optional(map(object({
       # Simple key-value env vars (plain text). Merged with env_vars; env_vars takes precedence for same key.
       environment_variables = optional(map(string), {})

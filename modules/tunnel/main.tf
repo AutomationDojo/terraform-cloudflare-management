@@ -119,22 +119,22 @@ resource "null_resource" "tunnel_credentials_sops" {
     command = <<-EOT
       script_path="${path.module}/scripts/encrypt-sops.sh"
       output_file="${each.value}"
-      %{ if var.sops_config_file != null ~}
+      %{if var.sops_config_file != null~}
       sops_config="${var.sops_config_file}"
       cat <<'JSONEOF' | "$script_path" "$output_file" "$sops_config"
 ${local.tunnel_credentials_json[each.key]}
 JSONEOF
-      %{ else ~}
+      %{else~}
       cat <<'JSONEOF' | "$script_path" "$output_file"
 ${local.tunnel_credentials_json[each.key]}
 JSONEOF
-      %{ endif ~}
+      %{endif~}
     EOT
   }
 
   provisioner "local-exec" {
-    when    = destroy
-    command = <<-EOT
+    when       = destroy
+    command    = <<-EOT
       rm -f "${self.triggers.file_path}"
     EOT
     on_failure = continue
@@ -168,22 +168,22 @@ resource "null_resource" "tunnel_tokens_sops" {
     command = <<-EOT
       script_path="${path.module}/scripts/encrypt-sops.sh"
       output_file="${each.value}"
-      %{ if var.sops_config_file != null ~}
+      %{if var.sops_config_file != null~}
       sops_config="${var.sops_config_file}"
       cat <<'JSONEOF' | "$script_path" "$output_file" "$sops_config"
 ${local.tunnel_token_json[each.key]}
 JSONEOF
-      %{ else ~}
+      %{else~}
       cat <<'JSONEOF' | "$script_path" "$output_file"
 ${local.tunnel_token_json[each.key]}
 JSONEOF
-      %{ endif ~}
+      %{endif~}
     EOT
   }
 
   provisioner "local-exec" {
-    when    = destroy
-    command = <<-EOT
+    when       = destroy
+    command    = <<-EOT
       rm -f "${self.triggers.file_path}"
     EOT
     on_failure = continue

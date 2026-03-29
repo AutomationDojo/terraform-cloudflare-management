@@ -8,10 +8,10 @@ resource "cloudflare_pages_project" "projects" {
   source = {
     type = "github"
     config = {
-      owner                         = each.value.github_owner
-      repo_name                     = each.value.github_repo
-      production_branch             = each.value.production_branch
-      pr_comments_enabled           = true
+      owner                          = each.value.github_owner
+      repo_name                      = each.value.github_repo
+      production_branch              = each.value.production_branch
+      pr_comments_enabled            = true
       production_deployments_enabled = each.value.production_deployments_enabled
       preview_deployment_setting     = each.value.preview_deployment_setting
       preview_branch_includes        = length(each.value.preview_branch_includes) > 0 ? each.value.preview_branch_includes : null

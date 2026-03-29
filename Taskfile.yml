@@ -1,0 +1,28 @@
+version: "3"
+
+vars:
+  MODULES:
+    - modules/dns
+    - modules/email
+    - modules/pages
+    - modules/r2
+    - modules/tunnel
+
+tasks:
+  fmt:
+    desc: Run terraform fmt on all modules
+    cmds:
+      - for: { var: MODULES }
+        cmd: terraform fmt {{.ITEM}}
+
+  docs:
+    desc: Generate terraform-docs for all modules
+    cmds:
+      - for: { var: MODULES }
+        cmd: terraform-docs {{.ITEM}}
+
+  all:
+    desc: Run fmt and docs for all modules
+    cmds:
+      - task: fmt
+      - task: docs

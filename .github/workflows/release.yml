@@ -9,34 +9,29 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   release:
-    name: Semantic Release
-    runs-on: ubuntu-latest
+    uses: AutomationDojo/reusable-cicd/.github/workflows/semantic-release_simple-release.yml@main
+    with:
+      extra-plugins: |
+        @semantic-release/changelog
+        @semantic-release/git
+        @semantic-release/exec
+        conventional-changelog-conventionalcommits
+    secrets:
+      GITHUB_APP_ID: ${{ secrets.AUTOMATION_DOJO_APP_ID }}
+      GITHUB_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_DOJO_PRIVATE_KEY }}
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
-
-      - name: Install dependencies
-        run: |
-          npm install -g \
-            semantic-release \
-            @semantic-release/changelog \
-            @semantic-release/git \
-            @semantic-release/github \
-            conventional-changelog-conventionalcommits
-
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release
+  docs:
+    needs: release
+    if: needs.release.outputs.new-release == 'true'
+    uses: AutomationDojo/reusable-cicd/.github/workflows/mkdocs_deploy.yml@main
+    with:
+      mkdocs-packages: "mkdocs>=1.5.3 mkdocs-material>=9.5.0 mkdocs-glightbox>=0.3.5 pymdown-extensions>=10.6"

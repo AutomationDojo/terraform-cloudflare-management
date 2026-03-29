@@ -14,7 +14,8 @@ The Pages module enables you to create and manage Cloudflare Pages projects with
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 
@@ -37,7 +38,8 @@ module "pages" {
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 
@@ -63,7 +65,8 @@ You can use **`environment_variables`** (simple `map(string)`, all plain text) o
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 
@@ -129,7 +132,8 @@ Both forms can be combined; `env_vars` takes precedence for the same key.
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 
@@ -151,7 +155,8 @@ module "pages" {
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 
