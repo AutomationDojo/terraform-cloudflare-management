@@ -14,7 +14,7 @@ variable "email_routing" {
   type = object({
     enabled = bool
     rules = list(object({
-      name     = string
+      name = string
       matchers = list(object({
         type  = string
         field = string

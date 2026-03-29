@@ -2,10 +2,10 @@ output "projects" {
   description = "Map of all Cloudflare Pages projects"
   value = {
     for k, v in cloudflare_pages_project.projects : k => {
-      id         = v.id
-      name       = v.name
-      subdomain  = v.subdomain
-      domains    = v.domains
+      id        = v.id
+      name      = v.name
+      subdomain = v.subdomain
+      domains   = v.domains
     }
   }
 }

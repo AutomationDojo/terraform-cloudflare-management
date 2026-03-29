@@ -10,7 +10,7 @@ Terraform module for creating and managing Cloudflare Tunnels (formerly Argo Tun
 - Support for both cloudflare-managed and locally-managed tunnels
 - Output credentials for cloudflared daemon configuration
 
-## Usage
+## Examples
 
 ### Basic Tunnel with Ingress Rules
 

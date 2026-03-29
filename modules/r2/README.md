@@ -9,32 +9,6 @@ Terraform module for managing Cloudflare R2 storage buckets.
 - Support for multiple buckets
 - Auto location selection
 
-## Usage
-
-```hcl
-module "r2" {
-  source = "AutomationDojo/management/cloudflare//modules/r2"
-  version = "2.3.0"
-
-  account_id = var.cloudflare_account_id
-
-  buckets = [
-    {
-      name          = "my-storage-bucket"
-      location      = "eeur"
-      jurisdiction  = "eu"
-      storage_class = "Standard"
-    },
-    {
-      name          = "us-data-bucket"
-      location      = "wnam"
-      jurisdiction  = "us"
-      storage_class = "Standard"
-    }
-  ]
-}
-```
-
 <!-- BEGIN_TF_DOCS -->
 ## Usage
 

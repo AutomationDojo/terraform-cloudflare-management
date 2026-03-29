@@ -10,41 +10,6 @@ Terraform module for creating and managing Cloudflare Pages projects with GitHub
 - Flexible deployment configurations per environment
 - Production and preview deployments with granular control
 
-## Usage
-
-```hcl
-module "pages" {
-  source = "AutomationDojo/management/cloudflare//modules/pages"
-  version = "2.3.0"
-
-  account_id = var.cloudflare_account_id
-
-  projects = {
-    landing-page = {
-      name              = "my-landing-page"
-      production_branch = "main"
-      github_owner      = "my-org"
-      github_repo       = "my-repo"
-      build_command     = "npm run build"
-      destination_dir   = "dist"
-      root_dir          = ""
-      custom_domain     = "example.com"
-      deployment_configs = {
-        production = {
-          environment_variables = {
-            NODE_VERSION = "22"
-          }
-          # Optional: use env_vars for secrets (type = "plain_text" or "secret")
-          # env_vars = {
-          #   API_KEY = { value = var.api_key, type = "secret" }
-          # }
-        }
-      }
-    }
-  }
-}
-```
-
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -71,7 +36,7 @@ module "pages" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Cloudflare account ID | `string` | n/a | yes |
-| <a name="input_projects"></a> [projects](#input\_projects) | Map of Cloudflare Pages projects to create | <pre>map(object({<br/>    name                       = string<br/>    production_branch          = string<br/>    github_owner               = string<br/>    github_repo                = string<br/>    build_command              = string<br/>    destination_dir            = string<br/>    root_dir                   = optional(string, "")<br/>    custom_domain              = optional(string)<br/>    production_deployments_enabled = optional(bool, true)<br/>    preview_deployment_setting     = optional(string, "none")<br/>    preview_branch_includes    = optional(list(string), [])<br/>    deployment_configs = optional(map(object({<br/>      # Simple key-value env vars (plain text). Merged with env_vars; env_vars takes precedence for same key.<br/>      environment_variables = optional(map(string), {})<br/>      # Full env vars with type (plain_text or secret). Use for secrets or when you need to set type explicitly.<br/>      env_vars = optional(map(object({<br/>        value = string<br/>        type  = optional(string, "plain_text") # "plain_text" or "secret"<br/>      })), {})<br/>      compatibility_date  = optional(string, "2024-01-01")<br/>      compatibility_flags = optional(list(string), [])<br/>    })), {})<br/>  }))</pre> | n/a | yes |
+| <a name="input_projects"></a> [projects](#input\_projects) | Map of Cloudflare Pages projects to create | <pre>map(object({<br/>    name                           = string<br/>    production_branch              = string<br/>    github_owner                   = string<br/>    github_repo                    = string<br/>    build_command                  = string<br/>    destination_dir                = string<br/>    root_dir                       = optional(string, "")<br/>    custom_domain                  = optional(string)<br/>    production_deployments_enabled = optional(bool, true)<br/>    preview_deployment_setting     = optional(string, "none")<br/>    preview_branch_includes        = optional(list(string), [])<br/>    deployment_configs = optional(map(object({<br/>      # Simple key-value env vars (plain text). Merged with env_vars; env_vars takes precedence for same key.<br/>      environment_variables = optional(map(string), {})<br/>      # Full env vars with type (plain_text or secret). Use for secrets or when you need to set type explicitly.<br/>      env_vars = optional(map(object({<br/>        value = string<br/>        type  = optional(string, "plain_text") # "plain_text" or "secret"<br/>      })), {})<br/>      compatibility_date  = optional(string, "2024-01-01")<br/>      compatibility_flags = optional(list(string), [])<br/>    })), {})<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
