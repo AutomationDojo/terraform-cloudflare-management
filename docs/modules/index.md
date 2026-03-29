@@ -101,35 +101,35 @@ You can combine modules in a single Terraform configuration:
 # Deploy a Pages site
 module "pages" {
   source = "AutomationDojo/management/cloudflare//modules/pages"
-  version = "2.3.0"
+  version = "2.3.1"
   # ... configuration
 }
 
 # Configure DNS
 module "dns" {
   source = "AutomationDojo/management/cloudflare//modules/dns"
-  version = "2.3.0"
+  version = "2.3.1"
   # ... configuration
 }
 
 # Set up email routing
 module "email" {
   source = "AutomationDojo/management/cloudflare//modules/email"
-  version = "2.3.0"
+  version = "2.3.1"
   # ... configuration
 }
 
 # Create R2 storage buckets
 module "r2" {
   source = "AutomationDojo/management/cloudflare//modules/r2"
-  version = "2.3.0"
+  version = "2.3.1"
   # ... configuration
 }
 
 # Create secure tunnels
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
   # ... configuration
 }
 ```

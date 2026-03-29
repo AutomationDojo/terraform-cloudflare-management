@@ -16,7 +16,7 @@ The Tunnel module enables you to create and manage Cloudflare Tunnels for secure
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -45,7 +45,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -83,7 +83,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -119,7 +119,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -150,7 +150,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -190,7 +190,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -226,7 +226,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -332,7 +332,7 @@ The module supports automatically saving tunnel credentials to files, either as 
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
   tunnels    = var.tunnels
@@ -350,7 +350,7 @@ For better security, you can save credentials encrypted with SOPS:
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
   tunnels    = var.tunnels
@@ -372,7 +372,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
   
@@ -485,7 +485,7 @@ To expose services publicly, create DNS records:
 ```hcl
 module "dns" {
   source = "AutomationDojo/management/cloudflare//modules/dns"
-  version = "2.3.0"
+  version = "2.3.1"
 
   zone_id = var.cloudflare_zone_id
 

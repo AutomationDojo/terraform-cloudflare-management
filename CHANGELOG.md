@@ -1,3 +1,10 @@
+## [2.3.1](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v2.3.0...v2.3.1) (2026-03-29)
+
+### Bug Fixes
+
+* Add Apache License 2.0 [skip ci] ([b3ee039](https://github.com/AutomationDojo/terraform-cloudflare-management/commit/b3ee03937a1df7064529e5aa8650b760c6b5b59b))
+* module rework and license ([23ca590](https://github.com/AutomationDojo/terraform-cloudflare-management/commit/23ca590a38057cf12a2c9bc396a3b22c7e8fce09))
+
 ## [2.3.0](https://github.com/AutomationDojo/tf-module-cloudflare/compare/v2.2.0...v2.3.0) (2026-02-14)
 
 ### Features

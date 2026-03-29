@@ -27,7 +27,7 @@ Comprehensive Terraform module for managing Cloudflare resources with modular su
 ```hcl
 module "pages" {
   source = "AutomationDojo/management/cloudflare//modules/pages"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -57,7 +57,7 @@ module "pages" {
 ```hcl
 module "dns" {
   source = "AutomationDojo/management/cloudflare//modules/dns"
-  version = "2.3.0"
+  version = "2.3.1"
 
   zone_id = var.cloudflare_zone_id
 
@@ -78,7 +78,7 @@ module "dns" {
 ```hcl
 module "email" {
   source = "AutomationDojo/management/cloudflare//modules/email"
-  version = "2.3.0"
+  version = "2.3.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -119,7 +119,7 @@ module "email" {
 ```hcl
 module "r2" {
   source = "AutomationDojo/management/cloudflare//modules/r2"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -139,7 +139,7 @@ module "r2" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 

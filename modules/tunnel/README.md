@@ -17,7 +17,7 @@ Terraform module for creating and managing Cloudflare Tunnels (formerly Argo Tun
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -49,7 +49,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -76,7 +76,7 @@ module "tunnel" {
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -135,7 +135,7 @@ The module can automatically write credentials to a file:
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 
@@ -169,7 +169,7 @@ For better security, you can save credentials encrypted with SOPS:
 ```hcl
 module "tunnel" {
   source = "AutomationDojo/management/cloudflare//modules/tunnel"
-  version = "2.3.0"
+  version = "2.3.1"
 
   account_id = var.cloudflare_account_id
 

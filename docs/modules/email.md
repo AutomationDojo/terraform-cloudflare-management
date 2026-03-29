@@ -16,7 +16,7 @@ The Email Routing module enables you to forward emails from your domain to desti
 ```hcl
 module "email" {
   source = "AutomationDojo/management/cloudflare//modules/email"
-  version = "2.3.0"
+  version = "2.3.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -61,7 +61,7 @@ module "email" {
 ```hcl
 module "email" {
   source = "AutomationDojo/management/cloudflare//modules/email"
-  version = "2.3.0"
+  version = "2.3.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
@@ -149,7 +149,7 @@ module "email" {
 ```hcl
 module "email" {
   source = "AutomationDojo/management/cloudflare//modules/email"
-  version = "2.3.0"
+  version = "2.3.1"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id
