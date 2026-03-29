@@ -194,4 +194,4 @@ See [examples](./examples/) directory for complete usage examples.
 
 ## License
 
-MIT
+[License](./LICENSE)
