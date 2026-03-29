@@ -3,76 +3,13 @@ name: Generate Terraform Docs
 on:
   pull_request:
     paths:
-      - 'modules/**/**.tf'
-      - '.terraform-docs.yml'
-
-# 🔒 Ensure only the latest run per PR can push docs
-concurrency:
-  group: terraform-docs-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+      - "modules/**/**.tf"
+      - ".terraform-docs.yml"
 
 permissions:
   contents: write
   pull-requests: write
 
-# ------------------------------------------------------------
-# Job 1 — Detect changed Terraform modules dynamically
-# ------------------------------------------------------------
 jobs:
-  detect-modules:
-    name: Detect changed Terraform modules
-    runs-on: ubuntu-latest
-
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Build module matrix
-        id: set-matrix
-        run: |
-          CHANGED_MODULES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD \
-            | grep '^modules/' \
-            | cut -d/ -f2 \
-            | sort -u)
-
-          if [ -z "$CHANGED_MODULES" ]; then
-            echo 'matrix={"module":[]}' >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-
-          MATRIX_JSON=$(echo "$CHANGED_MODULES" | jq -R -s -c 'split("\n")[:-1]')
-          echo "matrix={\"module\":$MATRIX_JSON}" >> "$GITHUB_OUTPUT"
-
-# ------------------------------------------------------------
-# Job 2 — Generate terraform-docs only for changed modules
-# ------------------------------------------------------------
-  docs:
-    name: Terraform Docs — ${{ matrix.module }}
-    needs: detect-modules
-    if: ${{ needs.detect-modules.outputs.matrix != '{"module":[]}' }}
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.detect-modules.outputs.matrix) }}
-
-    steps:
-      - name: Checkout PR branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-
-      - name: Render terraform docs for ${{ matrix.module }}
-        uses: terraform-docs/gh-actions@v1
-        with:
-          working-dir: modules/${{ matrix.module }}
-          output-file: README.md
-          output-method: inject
-          git-push: true
-          git-commit-message: 'docs: update terraform-docs for ${{ matrix.module }}'
+  terraform-docs:
+    uses: AutomationDojo/reusable-cicd/.github/workflows/terraform-docs.yml@main

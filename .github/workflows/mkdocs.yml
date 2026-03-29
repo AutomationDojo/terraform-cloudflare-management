@@ -1,13 +1,10 @@
 name: Deploy Documentation
+
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
 
 permissions:
-  contents: write
-  issues: write
-  pull-requests: write
+  contents: read
   pages: write
   id-token: write
 
@@ -16,28 +13,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  docs-build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.11"
-
-      - run: pip install -r requirements.txt
-
-      - run: mkdocs build
-
-      - uses: actions/configure-pages@v5
-
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: site/
-
-  docs-deploy:
-    runs-on: ubuntu-latest
-    needs: docs-build
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+  docs:
+    uses: AutomationDojo/reusable-cicd/.github/workflows/mkdocs_deploy.yml@main
+    with:
+      python-version: "3.11"
+      mkdocs-packages: "mkdocs>=1.5.3 mkdocs-material>=9.5.0 mkdocs-glightbox>=0.3.5 pymdown-extensions>=10.6"

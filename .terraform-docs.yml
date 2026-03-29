@@ -1,0 +1,73 @@
+formatter: "markdown"
+
+version: ">= 0.18.0"
+
+content: |-
+  ## Usage
+
+  ```hcl
+  module "example" {
+    source  = "AutomationDojo/management/cloudflare"
+    version = "2.3.0"
+
+  {{- $maxLen := 0 -}}
+  {{- range .Module.Inputs }}{{- $l := len .Name }}{{- if gt $l $maxLen }}{{- $maxLen = $l }}{{- end }}{{- end }}
+
+  {{ range .Module.Inputs -}}{{ if .Required }}{{ printf "  %-*s = var.%s\n" $maxLen .Name .Name }}{{ end }}{{ end }}
+  {{ range .Module.Inputs -}}{{ if not .Required }}{{ printf "  %-*s = var.%s # optional\n" $maxLen .Name .Name }}{{ end }}{{ end -}}
+  }
+  ```
+
+  ## Requirements
+
+  | Name | Version |
+  |------|---------|
+  {{ range .Module.Requirements -}}
+  | {{ .Name }} | `{{ .Version }}` |
+  {{ end }}
+  ## Providers
+
+  | Name | Version |
+  |------|---------|
+  {{ range .Module.Providers -}}
+  | {{ .Name }} | `{{ .Version }}` |
+  {{ end }}
+  ## Resources
+
+  | Name | Type |
+  |------|------|
+  {{ range .Module.Resources -}}
+  | [{{ .ProviderName }}_{{ .Type }}.{{ .Name }}]({{ .URL }}) | {{ if eq .Mode "managed" }}resource{{ else }}data source{{ end }} |
+  {{ end }}
+  ## Inputs
+
+  | Name | Description | Type | Default | Required |
+  |------|-------------|------|---------|:--------:|
+  {{- range .Module.Inputs -}}{{ if .Required }}
+  | {{ .Name }} | {{ .Description }} | `{{ printf "%v" .Type | replace "\n" " " | replace "  " " " }}` | n/a | yes |
+  {{- end }}{{ end -}}
+  {{ range .Module.Inputs -}}{{ if not .Required }}
+  | {{ .Name }} | {{ .Description }} | `{{ printf "%v" .Type | replace "\n" " " | replace "  " " " }}` | {{ if .Default.HasDefault }}{{ if eq (printf "%v" .Default) "" }}`""`{{ else if eq (printf "%v" .Default) "map[]" }}`{}`{{ else if eq (printf "%v" .Type) "string" }}`"{{ .Default }}"`{{ else }}`{{ .Default }}`{{ end }}{{ else }}`null`{{ end }} | no |
+  {{- end }}{{ end }}
+  ## Outputs
+
+  | Name | Description |
+  |------|-------------|
+  {{ range .Module.Outputs -}}
+  | {{ .Name }} | {{ .Description }} |
+  {{ end }}
+
+output:
+  file: "README.md"
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+settings:
+  indent: 3
+  escape: true
+  required: true
+  type: true
+  default: true

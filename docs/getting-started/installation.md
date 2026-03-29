@@ -8,7 +8,6 @@ Before using this module, ensure you have:
 
 - **Terraform** >= 1.0 installed
 - **Cloudflare Account** with API access
-- **Git** for module source control
 
 ## Cloudflare API Token
 
@@ -63,7 +62,7 @@ export TF_VAR_cloudflare_zone_id="your-zone-id"
 
 ## Module Installation
 
-The module is installed directly from GitHub. No separate download is needed - Terraform handles this automatically.
+The module is available on the [Terraform Registry](https://registry.terraform.io/modules/AutomationDojo/management/cloudflare). No separate download is needed - Terraform handles this automatically.
 
 ### Using Specific Versions
 
@@ -71,24 +70,26 @@ It's recommended to pin to a specific version:
 
 ```hcl
 module "cloudflare_pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source  = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
   # ... configuration
 }
 ```
 
 ### Using Latest
 
-For development or testing, you can use the latest version:
+For development or testing, you can use a version constraint:
 
 ```hcl
 module "cloudflare_pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=main"
+  source  = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "~> 2.3"
   # ... configuration
 }
 ```
 
 !!! warning
-    Using `ref=main` means you'll get the latest changes, which may include breaking changes.
+    Using a loose version constraint means you may receive updates with breaking changes.
 
 ## Initialize Terraform
 

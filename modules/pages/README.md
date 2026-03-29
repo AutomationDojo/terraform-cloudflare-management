@@ -14,7 +14,8 @@ Terraform module for creating and managing Cloudflare Pages projects with GitHub
 
 ```hcl
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 

@@ -13,7 +13,8 @@ Terraform module for managing Cloudflare R2 storage buckets.
 
 ```hcl
 module "r2" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/r2?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/r2"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 

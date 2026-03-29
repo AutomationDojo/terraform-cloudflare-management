@@ -47,7 +47,8 @@ provider "cloudflare" {
 # ============================================================================
 
 module "pages_marketing" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 
@@ -77,7 +78,8 @@ module "pages_marketing" {
 # ============================================================================
 
 module "pages_docs" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
 
   account_id = var.cloudflare_account_id
 
@@ -107,7 +109,8 @@ module "pages_docs" {
 # ============================================================================
 
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
 
   zone_id = var.cloudflare_zone_id
 
@@ -189,7 +192,8 @@ module "dns" {
 # ============================================================================
 
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/email"
+  version = "2.3.0"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id

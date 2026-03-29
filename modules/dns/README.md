@@ -13,7 +13,8 @@ Terraform module for managing Cloudflare DNS records.
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
 
   zone_id = var.cloudflare_zone_id
 

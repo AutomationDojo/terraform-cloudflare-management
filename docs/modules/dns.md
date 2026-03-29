@@ -22,7 +22,8 @@ The DNS module provides a simple way to manage DNS records in your Cloudflare zo
 
 ```hcl
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
 
   zone_id = var.cloudflare_zone_id
 
@@ -44,7 +45,8 @@ module "dns" {
 
 ```hcl
 module "dns" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source  = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -139,7 +141,8 @@ records = [
 
 ```hcl
 module "dns" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source  = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -192,7 +195,8 @@ module "dns" {
 
 ```hcl
 module "dns_production" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source  = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -207,7 +211,8 @@ module "dns_production" {
 }
 
 module "dns_staging" {
-  source  = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source  = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
   zone_id = var.cloudflare_zone_id
 
   records = [
@@ -349,7 +354,8 @@ If you're upgrading from v1.x to v2.0+, the DNS resource name changed from `clou
 
 1. **Update module version** in your configuration:
    ```hcl
-   source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+   source = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
    ```
 
 2. **Update Terraform state** for each DNS record:

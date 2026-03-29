@@ -100,31 +100,36 @@ You can combine modules in a single Terraform configuration:
 ```hcl
 # Deploy a Pages site
 module "pages" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/pages?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/pages"
+  version = "2.3.0"
   # ... configuration
 }
 
 # Configure DNS
 module "dns" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/dns?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/dns"
+  version = "2.3.0"
   # ... configuration
 }
 
 # Set up email routing
 module "email" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/email?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/email"
+  version = "2.3.0"
   # ... configuration
 }
 
 # Create R2 storage buckets
 module "r2" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/r2?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/r2"
+  version = "2.3.0"
   # ... configuration
 }
 
 # Create secure tunnels
 module "tunnel" {
-  source = "git::git@github.com:AutomationDojo/tf-module-cloudflare.git//modules/tunnel?ref=v2.0.1"
+  source = "AutomationDojo/management/cloudflare//modules/tunnel"
+  version = "2.3.0"
   # ... configuration
 }
 ```
