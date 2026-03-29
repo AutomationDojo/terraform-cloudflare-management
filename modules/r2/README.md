@@ -36,22 +36,31 @@ module "r2" {
 ```
 
 <!-- BEGIN_TF_DOCS -->
+## Usage
+
+```hcl
+module "example" {
+  source  = "AutomationDojo/management/cloudflare"
+  version = "2.3.0"
+
+  account_id = var.account_id
+
+  buckets    = var.buckets # optional
+}
+```
+
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 5.0 |
+| terraform | `>= 1.0` |
+| cloudflare | `~> 5.0` |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | 5.17.0 |
-
-## Modules
-
-No modules.
+| cloudflare | `5.17.0` |
 
 ## Resources
 
@@ -65,14 +74,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_account_id"></a> [account\_id](#input\_account\_id) | Cloudflare account ID | `string` | n/a | yes |
-| <a name="input_buckets"></a> [buckets](#input\_buckets) | List of R2 buckets to create | <pre>list(object({<br/>    name          = string<br/>    location      = optional(string, "eeur")<br/>    jurisdiction  = optional(string, "eu")<br/>    storage_class = optional(string, "Standard")<br/>    cors_rules = optional(list(object({<br/>      id              = optional(string)<br/>      allowed_methods = list(string)<br/>      allowed_origins = list(string)<br/>      allowed_headers = optional(list(string))<br/>      expose_headers  = optional(list(string))<br/>      max_age_seconds = optional(number)<br/>    })), [])<br/>    custom_domains = optional(list(object({<br/>      domain  = string<br/>      zone_id = string<br/>      enabled = optional(bool, true)<br/>      min_tls = optional(string)<br/>    })), [])<br/>  }))</pre> | `[]` | no |
-
+| account_id | Cloudflare account ID | `string` | n/a | yes |
+| buckets | List of R2 buckets to create | `list(object({   name     = string   location   = optional(string, "eeur")   jurisdiction = optional(string, "eu")   storage_class = optional(string, "Standard")   cors_rules = optional(list(object({    id       = optional(string)    allowed_methods = list(string)    allowed_origins = list(string)    allowed_headers = optional(list(string))    expose_headers = optional(list(string))    max_age_seconds = optional(number)   })), [])   custom_domains = optional(list(object({    domain = string    zone_id = string    enabled = optional(bool, true)    min_tls = optional(string)   })), [])  }))` | `[]` | no |
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_bucket_cors"></a> [bucket\_cors](#output\_bucket\_cors) | Map of R2 bucket CORS configurations |
-| <a name="output_buckets"></a> [buckets](#output\_buckets) | Map of R2 buckets created |
-| <a name="output_custom_domains"></a> [custom\_domains](#output\_custom\_domains) | Map of R2 custom domain bindings |
+| bucket_cors | Map of R2 bucket CORS configurations |
+| buckets | Map of R2 buckets created |
+| custom_domains | Map of R2 custom domain bindings |
 <!-- END_TF_DOCS -->
