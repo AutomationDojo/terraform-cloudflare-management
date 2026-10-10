@@ -26,15 +26,17 @@ resource "cloudflare_pages_project" "projects" {
 
   deployment_configs = {
     production = {
-      env_vars            = local.production_env_vars[each.key]
+      # Empty maps/lists are sent as null: the API returns null for them, and
+      # an explicit {} / [] would show up as a change on every plan.
+      env_vars            = length(local.production_env_vars[each.key]) > 0 ? local.production_env_vars[each.key] : null
       compatibility_date  = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_date : "2024-01-01"
-      compatibility_flags = lookup(each.value.deployment_configs, "production", null) != null ? each.value.deployment_configs.production.compatibility_flags : []
+      compatibility_flags = length(try(each.value.deployment_configs.production.compatibility_flags, [])) > 0 ? each.value.deployment_configs.production.compatibility_flags : null
       fail_open           = true
     }
     preview = {
-      env_vars            = local.preview_env_vars[each.key]
+      env_vars            = length(local.preview_env_vars[each.key]) > 0 ? local.preview_env_vars[each.key] : null
       compatibility_date  = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_date : "2024-01-01"
-      compatibility_flags = lookup(each.value.deployment_configs, "preview", null) != null ? each.value.deployment_configs.preview.compatibility_flags : []
+      compatibility_flags = length(try(each.value.deployment_configs.preview.compatibility_flags, [])) > 0 ? each.value.deployment_configs.preview.compatibility_flags : null
       fail_open           = true
     }
   }
