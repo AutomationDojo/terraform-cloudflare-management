@@ -4,8 +4,13 @@ variable "zone_id" {
 }
 
 variable "records" {
-  description = "List of DNS records to create"
+  description = <<-EOT
+    List of DNS records to create. Each record is keyed "<type>-<name>", or
+    "<type>-<name>-<value>" when several records share type and name; set `key`
+    to choose the key yourself. Keys must be unique.
+  EOT
   type = list(object({
+    key      = optional(string)
     name     = string
     type     = string
     value    = string
