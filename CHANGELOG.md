@@ -1,3 +1,9 @@
+## [3.1.1](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v3.1.0...v3.1.1) (2026-10-10)
+
+### Bug Fixes
+
+* **email:** read tag from id (provider attribute deprecated) ([#20](https://github.com/AutomationDojo/terraform-cloudflare-management/issues/20)) ([3eb14c9](https://github.com/AutomationDojo/terraform-cloudflare-management/commit/3eb14c9eba5d49663e1c98d44ada891aeb36875a))
+
 ## [3.1.0](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v3.0.2...v3.1.0) (2026-10-10)
 
 ### Features
