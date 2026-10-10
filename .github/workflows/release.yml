@@ -24,7 +24,7 @@ jobs:
         @semantic-release/changelog
         @semantic-release/git
         @semantic-release/exec
-        conventional-changelog-conventionalcommits
+        conventional-changelog-conventionalcommits@8
     secrets:
       GITHUB_APP_ID: ${{ secrets.AUTOMATION_DOJO_APP_ID }}
       GITHUB_APP_PRIVATE_KEY: ${{ secrets.AUTOMATION_DOJO_PRIVATE_KEY }}
