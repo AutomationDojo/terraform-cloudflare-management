@@ -1,3 +1,9 @@
+## [3.0.2](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v3.0.1...v3.0.2) (2026-10-10)
+
+### Bug Fixes
+
+* **pages:** revert null for empty env_vars and compatibility_flags ([e6cf69c](https://github.com/AutomationDojo/terraform-cloudflare-management/commit/e6cf69c3f2ffd48b45560f7672e4d676b53f87b0))
+
 ## [3.0.1](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v3.0.0...v3.0.1) (2026-10-10)
 
 ### Bug Fixes
