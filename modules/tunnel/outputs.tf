@@ -34,6 +34,7 @@ output "tunnel_creds_json" {
       TunnelName   = v.name
       TunnelSecret = random_id.tunnel_secret[k].b64_std
     })
+    if var.tunnels[k].manage_secret
   }
   sensitive = true
 }

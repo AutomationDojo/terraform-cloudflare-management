@@ -1,6 +1,6 @@
 # Generate random secret for each tunnel
 resource "random_id" "tunnel_secret" {
-  for_each    = var.tunnels
+  for_each    = { for k, v in var.tunnels : k => v if v.manage_secret }
   byte_length = 32
 }
 
@@ -11,7 +11,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared" "tunnels" {
   account_id    = var.account_id
   name          = each.value.name
   config_src    = each.value.config_src
-  tunnel_secret = random_id.tunnel_secret[each.key].b64_std
+  tunnel_secret = each.value.manage_secret ? random_id.tunnel_secret[each.key].b64_std : null
 }
 
 # Get tunnel tokens (required for running cloudflared with --token flag)
