@@ -16,10 +16,12 @@ resource "cloudflare_zero_trust_tunnel_cloudflared" "tunnels" {
 
 # Get tunnel tokens (required for running cloudflared with --token flag)
 data "cloudflare_zero_trust_tunnel_cloudflared_token" "tokens" {
-  for_each = cloudflare_zero_trust_tunnel_cloudflared.tunnels
+  # Keyed on var.tunnels, not on the resource: iterating the resource objects
+  # pulls in their deprecated attributes (connections, remote_config).
+  for_each = var.tunnels
 
   account_id = var.account_id
-  tunnel_id  = each.value.id
+  tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.tunnels[each.key].id
 }
 
 # Configure tunnel ingress rules (only for cloudflare-managed tunnels with ingress rules)
@@ -110,7 +112,9 @@ resource "null_resource" "tunnel_credentials_sops" {
   for_each = var.output_file_path != null && var.output_file_format == "sops" ? local.tunnel_file_paths : {}
 
   triggers = {
-    credentials_json = local.tunnel_credentials_json[each.key]
+    # sensitive(): triggers are shown in plans (e.g. when the resource is
+    # destroyed), and these hold the tunnel secret.
+    credentials_json = sensitive(local.tunnel_credentials_json[each.key])
     file_path        = each.value
     tunnel_key       = each.key
   }
@@ -159,7 +163,8 @@ resource "null_resource" "tunnel_tokens_sops" {
   for_each = var.output_token_file_path != null && var.output_file_format == "sops" ? local.tunnel_token_file_paths : {}
 
   triggers = {
-    token_json = local.tunnel_token_json[each.key]
+    # sensitive(): triggers are shown in plans, and this holds the tunnel token.
+    token_json = sensitive(local.tunnel_token_json[each.key])
     file_path  = each.value
     tunnel_key = each.key
   }
