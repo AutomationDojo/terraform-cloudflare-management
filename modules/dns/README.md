@@ -34,7 +34,7 @@ Terraform module for managing Cloudflare DNS records.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_records"></a> [records](#input\_records) | List of DNS records to create | <pre>list(object({<br/>    name     = string<br/>    type     = string<br/>    value    = string<br/>    ttl      = optional(number, 1)<br/>    proxied  = optional(bool, false)<br/>    priority = optional(number, null)<br/>  }))</pre> | `[]` | no |
+| <a name="input_records"></a> [records](#input\_records) | List of DNS records to create. Each record is keyed "<type>-<name>", or<br/>"<type>-<name>-<value>" when several records share type and name; set `key`<br/>to choose the key yourself. Keys must be unique. | <pre>list(object({<br/>    key      = optional(string)<br/>    name     = string<br/>    type     = string<br/>    value    = string<br/>    ttl      = optional(number, 1)<br/>    proxied  = optional(bool, false)<br/>    priority = optional(number, null)<br/>  }))</pre> | `[]` | no |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | Cloudflare zone ID | `string` | n/a | yes |
 
 ## Outputs
