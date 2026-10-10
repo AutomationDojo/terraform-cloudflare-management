@@ -26,7 +26,7 @@ This module provides a structured, maintainable way to manage your Cloudflare in
 ```hcl
 module "cloudflare_pages" {
   source = "AutomationDojo/management/cloudflare//modules/pages"
-  version = "3.0.0"
+  version = "3.0.1"
 
   account_id = var.cloudflare_account_id
 

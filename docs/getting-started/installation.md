@@ -71,7 +71,7 @@ It's recommended to pin to a specific version:
 ```hcl
 module "cloudflare_pages" {
   source  = "AutomationDojo/management/cloudflare//modules/pages"
-  version = "3.0.0"
+  version = "3.0.1"
   # ... configuration
 }
 ```
