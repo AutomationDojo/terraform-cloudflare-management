@@ -54,7 +54,7 @@ Add to your `main.tf`:
 ```hcl
 module "pages" {
   source = "AutomationDojo/management/cloudflare//modules/pages"
-  version = "3.0.2"
+  version = "3.1.0"
 
   account_id = var.cloudflare_account_id
 
@@ -84,7 +84,7 @@ module "pages" {
 ```hcl
 module "dns" {
   source = "AutomationDojo/management/cloudflare//modules/dns"
-  version = "3.0.2"
+  version = "3.1.0"
 
   zone_id = var.cloudflare_zone_id
 
@@ -112,7 +112,7 @@ module "dns" {
 ```hcl
 module "email" {
   source = "AutomationDojo/management/cloudflare//modules/email"
-  version = "3.0.2"
+  version = "3.1.0"
 
   zone_id    = var.cloudflare_zone_id
   account_id = var.cloudflare_account_id

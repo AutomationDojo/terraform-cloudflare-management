@@ -1,3 +1,9 @@
+## [3.1.0](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v3.0.2...v3.1.0) (2026-10-10)
+
+### Features
+
+* **tunnel:** manage_secret = false to adopt existing tunnels ([#19](https://github.com/AutomationDojo/terraform-cloudflare-management/issues/19)) ([e13a6f3](https://github.com/AutomationDojo/terraform-cloudflare-management/commit/e13a6f30b86dcfdfd382128f63f0c2073ec7d87c))
+
 ## [3.0.2](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v3.0.1...v3.0.2) (2026-10-10)
 
 ### Bug Fixes
