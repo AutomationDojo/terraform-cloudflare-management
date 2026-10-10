@@ -7,9 +7,11 @@ output "email_addresses" {
   description = "Map of email addresses created"
   value = {
     for k, v in cloudflare_email_routing_address.addresses : k => {
-      id      = v.id
-      email   = v.email
-      tag     = v.tag
+      id    = v.id
+      email = v.email
+      # Deprecated provider attribute; it always equals the id. Kept in the
+      # output for compatibility, sourced from id to avoid the warning.
+      tag     = v.id
       created = v.created
     }
   }
@@ -23,7 +25,8 @@ output "email_rules" {
       name     = v.name
       enabled  = v.enabled
       priority = v.priority
-      tag      = v.tag
+      # Deprecated provider attribute; it always equals the id.
+      tag = v.id
     }
   }
 }
