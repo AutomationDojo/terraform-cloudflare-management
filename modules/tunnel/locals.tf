@@ -7,6 +7,7 @@ locals {
       TunnelName   = v.name
       TunnelSecret = random_id.tunnel_secret[k].b64_std
     }
+    if var.tunnels[k].manage_secret
   }
   # Individual tunnel credentials as JSON strings
   tunnel_credentials_json = {
@@ -18,6 +19,7 @@ locals {
 locals {
   tunnel_file_paths = var.output_file_path != null ? {
     for k, v in cloudflare_zero_trust_tunnel_cloudflared.tunnels : k => replace(var.output_file_path, "{tunnel_key}", k)
+    if var.tunnels[k].manage_secret
   } : {}
 
   # Determine file path for tunnel tokens

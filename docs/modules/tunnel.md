@@ -265,6 +265,47 @@ module "tunnel" {
 }
 ```
 
+### Adopting an Existing Tunnel
+
+To bring a tunnel created in the dashboard (or elsewhere) under management
+without rotating its secret, set `manage_secret = false` and import it. The
+module then neither generates nor sends a `tunnel_secret`, so the connectors
+already running with the tunnel's token keep working.
+
+```hcl
+module "tunnel" {
+  source  = "AutomationDojo/management/cloudflare//modules/tunnel"
+  version = "3.1.0"
+
+  account_id = var.account_id
+  tunnels = {
+    app = {
+      name          = "app"
+      manage_secret = false
+      ingress_rules = [
+        { hostname = "app.example.com", service = "http://app.app.svc.cluster.local:80" },
+        { service = "http_status:404" },
+      ]
+    }
+  }
+}
+
+import {
+  to = module.tunnel.cloudflare_zero_trust_tunnel_cloudflared.tunnels["app"]
+  id = "<account_id>/<tunnel_id>"
+}
+
+import {
+  to = module.tunnel.cloudflare_zero_trust_tunnel_cloudflared_config.configs["app"]
+  id = "<account_id>/<tunnel_id>"
+}
+```
+
+Copy the ingress rules exactly as they are configured (including the final
+catch-all rule), or the plan will update the tunnel's configuration. Adopted
+tunnels have no entry in `tunnel_secrets` / `tunnel_creds_json` and get no
+credentials file; `tunnel_tokens` works for every tunnel.
+
 ## Inputs
 
 | Name | Description | Type | Required | Default |
@@ -281,6 +322,7 @@ module "tunnel" {
 |-------|-------------|------|----------|---------|
 | `name` | Tunnel name | `string` | Yes | - |
 | `config_src` | Configuration source (`cloudflare` or `local`) | `string` | No | `"cloudflare"` |
+| `manage_secret` | Generate and set the tunnel secret; `false` for [adopted tunnels](#adopting-an-existing-tunnel) | `bool` | No | `true` |
 | `ingress_rules` | List of ingress rules | `list(object)` | No | `[]` |
 | `private_networks` | List of private network routes | `list(object)` | No | `[]` |
 

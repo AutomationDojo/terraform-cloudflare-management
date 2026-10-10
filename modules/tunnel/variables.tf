@@ -8,6 +8,12 @@ variable "tunnels" {
   type = map(object({
     name       = string
     config_src = optional(string, "cloudflare")
+    # false for tunnels adopted with an import block: the module then neither
+    # generates nor sends a tunnel_secret, so importing does not rotate the
+    # secret (and invalidate the token) of a tunnel already in use. Such
+    # tunnels get no credentials file and no tunnel_secrets/tunnel_creds_json
+    # entry; tunnel_tokens still works.
+    manage_secret = optional(bool, true)
     ingress_rules = optional(list(object({
       hostname = optional(string)
       path     = optional(string)
