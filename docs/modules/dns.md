@@ -2,6 +2,12 @@
 
 The DNS module provides a simple way to manage DNS records in your Cloudflare zones.
 
+!!! warning "Version 3.0 Upgrade"
+    Version 3.0 keys records by `<type>-<name>` (or `<type>-<name>-<value>` when
+    several records share type and name) instead of by list position, so adding
+    or removing a record no longer re-keys the ones after it. Existing states
+    need `moved` blocks once; see [record keys](#record-keys).
+
 !!! warning "Version 2.0 Upgrade"
     Version 2.0+ uses the `cloudflare_dns_record` resource (required by Cloudflare provider v5). Key changes:
     - Resource renamed from `cloudflare_record` to `cloudflare_dns_record`
@@ -134,6 +140,41 @@ records = [
   }
 ]
 ```
+
+## Record keys
+
+Each record gets a stable key in `cloudflare_dns_record.records`:
+
+| Case | Key |
+|---|---|
+| `key` set on the record | that value |
+| type and name unique in the list | `<type>-<name>`, e.g. `CNAME-www` |
+| several records share type and name | `<type>-<name>-<value>`, e.g. `MX-@-route1.mx.cloudflare.net` |
+
+Keys must be unique; a clash fails the plan with a duplicate key error. Set
+`key` to keep a record's address stable when its value changes (otherwise a
+value change on a shared type/name re-keys it, which recreates the record).
+
+### Upgrading from 2.x
+
+2.x keyed records as `<type>-<name>-<index>`. Add one `moved` block per
+record, from the old key to the new one, in the same change that bumps the
+version:
+
+```hcl
+moved {
+  from = module.dns.cloudflare_dns_record.records["CNAME-www-1"]
+  to   = module.dns.cloudflare_dns_record.records["CNAME-www"]
+}
+
+moved {
+  from = module.dns.cloudflare_dns_record.records["MX-@-2"]
+  to   = module.dns.cloudflare_dns_record.records["MX-@-mail.example.com"]
+}
+```
+
+The plan should then show only moves. Any create/destroy pair means a `moved`
+block is missing or wrong.
 
 ## Advanced Examples
 

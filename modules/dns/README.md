@@ -8,6 +8,7 @@ Terraform module for managing Cloudflare DNS records.
 - 🔄 Support for all DNS record types (A, AAAA, CNAME, MX, TXT, etc.)
 - 🌐 Proxy support for HTTP/HTTPS records
 - ⚙️ Configurable TTL per record
+- 🔑 Stable record keys (`<type>-<name>`, or `<type>-<name>-<value>` for shared type/name, or an explicit `key`): adding or removing a record never re-keys the others. Upgrading from 2.x needs `moved` blocks, see the docs.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
