@@ -15,7 +15,7 @@ Terraform module for managing Cloudflare R2 storage buckets.
 ```hcl
 module "example" {
   source  = "AutomationDojo/management/cloudflare"
-  version = "2.3.1"
+  version = "3.0.0"
 
   account_id = var.account_id
 

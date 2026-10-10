@@ -1,3 +1,17 @@
+## [3.0.0](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v2.3.1...v3.0.0) (2026-10-10)
+
+### ⚠ BREAKING CHANGES
+
+* **dns:** records are keyed <type>-<name> (or <type>-<name>-<value>) instead of by list index; add moved blocks when upgrading from 2.x
+
+### Features
+
+* **dns:** stable record keys ([e3ef13e](https://github.com/AutomationDojo/terraform-cloudflare-management/commit/e3ef13ee1ed013c5455ee48c35f9f0bf5eaf347e))
+
+### Bug Fixes
+
+* **tunnel:** mark tunnel secret and token triggers sensitive ([f638487](https://github.com/AutomationDojo/terraform-cloudflare-management/commit/f6384875068f7bc9c97f49d504a860b82ac03f5c))
+
 ## [2.3.1](https://github.com/AutomationDojo/terraform-cloudflare-management/compare/v2.3.0...v2.3.1) (2026-03-29)
 
 ### Bug Fixes
